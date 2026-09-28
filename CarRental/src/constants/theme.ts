@@ -63,3 +63,39 @@ export const Spacing = {
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
+
+//modified
+export const color = {
+    surface: '#FFFFFF', //Pure White -> screen and card backgrounds
+    surfaceSecondary: '#F7F7F7', // Off-white -> image backgrounds and chip bases
+    border: '#E5E5E5', // Light Gray -> card borders and dividers
+    primary: '#000000', // Pure Black -> headings, car titles, main prices
+    textSecondary: '#4A4A4A', // Charcoal Gray -> specifications, queued status
+    blue: '#0047AB', // Cobalt Blue -> primary actions, active filters
+    red: '#CC1100', // Crimson Red -> errors, failed status
+    green: '#0F753C', // Forest Green -> confirmed status
+};
+
+export const typography = {
+    displayPrice: {
+    fontSize: 32,
+    fontWeight: '700' as const,
+  },
+  h1:{
+    fontSize: 24,
+    fontWeight: '600' as const,
+  },
+  h2:{
+    fontSize: 18,
+    fontWeight: '600' as const,
+  },
+  bodyPrimary:{
+    fontSize: 16,
+  },
+  bodySecondary:{
+    fontSize: 14,
+  },
+  caption:{
+    fontSize: 12,
+  },
+};
