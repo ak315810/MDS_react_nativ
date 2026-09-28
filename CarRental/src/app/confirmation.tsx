@@ -1,13 +1,9 @@
-import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function PaymentScreen() {
+export default function ConfirmationScreen() {
   return (
     <View style={styles.container}>
-      <Text>Payment Details</Text>
-      <Link href="/confirmation">
-        <Text>Confirm Booking</Text>
-      </Link>
+      <Text>Booking Confirmation</Text>
     </View>
   );
 }
