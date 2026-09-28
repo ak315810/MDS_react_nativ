@@ -23,6 +23,8 @@ export default function RootLayout() {
         <Stack.Screen name="confirmation" options={{ title: 'Booking Confirmation'}} />
         <Stack.Screen name="booking-queued" options={{ title: 'Booking Queued'}} />
         <Stack.Screen name="booking-failed" options={{ title: 'Booking Failed'}} />
+        <Stack.Screen name="account" options={{ title: 'User Account'}} />
+        <Stack.Screen name="filters" options={{ title: 'Filters'}} />
       </Stack>
     </ThemeProvider>
   );
