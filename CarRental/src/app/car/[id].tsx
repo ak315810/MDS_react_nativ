@@ -1,13 +1,9 @@
-import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function SearchScreen() {
+export default function CarDetailsScreen() {
   return (
     <View style={styles.container}>
-      <Text>Search Results</Text>
-      <Link href="/car/1">
-        <Text>View Car Details</Text>
-      </Link>
+      <Text>Car Details</Text>
     </View>
   );
 }
