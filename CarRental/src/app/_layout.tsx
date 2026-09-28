@@ -18,6 +18,7 @@ export default function RootLayout() {
         <Stack.Screen name="search" options={{ title: 'Search Results' }} />
         <Stack.Screen name="explore" options={{ title: 'Explore' }} />
         <Stack.Screen name="car/[id]" options={{ title: 'Car Details' }} />
+        <Stack.Screen name="checkout" options={{ title: 'Booking Details' }} />
       </Stack>
     </ThemeProvider>
   );
