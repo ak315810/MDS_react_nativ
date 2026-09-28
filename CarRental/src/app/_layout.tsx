@@ -25,6 +25,7 @@ export default function RootLayout() {
         <Stack.Screen name="booking-failed" options={{ title: 'Booking Failed'}} />
         <Stack.Screen name="account" options={{ title: 'User Account'}} />
         <Stack.Screen name="filters" options={{ title: 'Filters'}} />
+        <Stack.Screen name="policies" options={{ title: 'Terms and Policies'}} />
       </Stack>
     </ThemeProvider>
   );
