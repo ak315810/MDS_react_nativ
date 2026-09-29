@@ -114,12 +114,11 @@ export default function SearchScreen() {
         keyExtractor={(item) => item.vehicleId}
         renderItem={({ item }) => (
           <CarCard 
-            make={item.brand}       
-            model={item.model} 
-            price={item.dailyPrice} 
-            specs={item.fuelType}   
-            onPress={() => router.push(`/car/${item.vehicleId}`)}
-            // imageUrl={item.image} // Si mockCars tiene imágenes, puedes pasarla aquí
+          brand={item.brand}      
+          model={item.model} 
+          dailyPrice={item.dailyPrice} 
+          specs={item.fuelType}   
+          onPress={() => router.push(`/car/${item.vehicleId}`)}
           />
         )}
         initialNumToRender={5}
