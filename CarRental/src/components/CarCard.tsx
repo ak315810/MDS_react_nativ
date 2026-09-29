@@ -20,7 +20,7 @@ export function CarCard({ make, model, price, specs, imageUrl, onPress }: Props)
         <View style={styles.info}>
           <Text style={styles.title}>{make} {model}</Text>
           <Text style={styles.specs}>{specs}</Text>
-          <Text style={styles.price}>{price} kr / day</Text>
+          <Text style={styles.price}>{price} DKK / day</Text>
         </View>
       </View>
 
