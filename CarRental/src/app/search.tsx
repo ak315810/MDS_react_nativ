@@ -109,6 +109,7 @@ export default function SearchScreen() {
         />
       </View>
       <FlatList
+       style={{ width: '100%' }}
         data={displayedCars}
         keyExtractor={(item) => item.vehicleId}
         renderItem={({ item }) => (
