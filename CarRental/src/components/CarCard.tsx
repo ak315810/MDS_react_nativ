@@ -1,25 +1,25 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { color } from '../constants/theme';
+import { colors } from '../constants/theme';
 interface Props {
-  make: string;
+  brand: string;
   model: string;
-  price: number;
+  dailyPrice: number;
   specs?: string;
   imageUrl?: string;
   onPress?: () => void;
 }
 
-export function CarCard({ make, model, price, specs, imageUrl, onPress }: Props) {
+export function CarCard({ brand, model, dailyPrice, specs, imageUrl, onPress }: Props) {
   return (
     <View style={styles.card}>
       <View style={styles.row}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
 
         <View style={styles.info}>
-          <Text style={styles.title}>{make} {model}</Text>
+          <Text style={styles.title}>{brand} {model}</Text>
           <Text style={styles.specs}>{specs}</Text>
-          <Text style={styles.price}>{price} kr / day</Text>
+          <Text style={styles.dailyPrice}>{dailyPrice} DKK/day </Text>
         </View>
       </View>
 

@@ -65,7 +65,7 @@ export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
 
 //modified
-export const color = {
+export const colors = {
     surface: '#FFFFFF', //Pure White -> screen and card backgrounds
     surfaceSecondary: '#F7F7F7', // Off-white -> image backgrounds and chip bases
     border: '#E5E5E5', // Light Gray -> card borders and dividers
