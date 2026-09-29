@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { colors } from '../constants/theme';
+import { color } from '../constants/theme';
 
 interface Props {
   label: string;
@@ -23,8 +23,8 @@ export function FilterChip({ label, selected, onPress }: Props) {
 
 const styles = StyleSheet.create({
   chip: {
-    backgroundColor: colors.surface,
-    borderColor: colors.border,
+    backgroundColor: color.surface,
+    borderColor: color.border,
     borderWidth: 1,
     borderRadius: 6,
     paddingVertical: 8,
@@ -32,15 +32,15 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   chipSelected: {
-    backgroundColor: colors.blue,
-    borderColor: colors.blue,
+    backgroundColor: color.blue,
+    borderColor: color.blue,
   },
   text: {
-    color: colors.textSecondary,
+    color: color.textSecondary,
     fontSize: 13,
   },
   textSelected: {
-    color: colors.surface,
+    color: color.surface,
     fontWeight: 'bold',
   },
 });
