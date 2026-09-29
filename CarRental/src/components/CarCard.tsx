@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { colors } from '../constants/theme';
-
+import { color } from '../constants/theme';
 interface Props {
   make: string;
   model: string;
@@ -33,8 +32,8 @@ export function CarCard({ make, model, price, specs, imageUrl, onPress }: Props)
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.surface,
-    borderColor: colors.border,
+    backgroundColor: color.surface,
+    borderColor: color.border,
     borderWidth: 1,
     borderRadius: 8,
     padding: 12,
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     width: 72,
     height: 52,
     borderRadius: 6,
-    backgroundColor: colors.surfaceSecondary,
+    backgroundColor: color.surfaceSecondary,
     marginRight: 12,
   },
   info: {
@@ -58,26 +57,26 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: color.primary,
   },
   specs: {
     fontSize: 13,
-    color: colors.textSecondary,
+    color: color.textSecondary,
     marginVertical: 2,
   },
   price: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: color.primary,
   },
   button: {
-    backgroundColor: colors.blue,
+    backgroundColor: color.blue,
     paddingVertical: 10,
     borderRadius: 6,
     alignItems: 'center',
   },
   buttonText: {
-    color: colors.surface,
+    color: color.surface,
     fontWeight: 'bold',
   },
 });
