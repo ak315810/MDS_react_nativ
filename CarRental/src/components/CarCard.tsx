@@ -32,8 +32,8 @@ export function CarCard({ brand, model, dailyPrice, specs, imageUrl, onPress }: 
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: color.surface,
-    borderColor: color.border,
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
     borderWidth: 1,
     borderRadius: 8,
     padding: 12,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     width: 72,
     height: 52,
     borderRadius: 6,
-    backgroundColor: color.surfaceSecondary,
+    backgroundColor: colors.surfaceSecondary,
     marginRight: 12,
   },
   info: {
@@ -57,26 +57,26 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: color.primary,
+    color: colors.primary,
   },
   specs: {
     fontSize: 13,
-    color: color.textSecondary,
+    color: colors.textSecondary,
     marginVertical: 2,
   },
   price: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: color.primary,
+    color: colors.primary,
   },
   button: {
-    backgroundColor: color.blue,
+    backgroundColor: colors.blue,
     paddingVertical: 10,
     borderRadius: 6,
     alignItems: 'center',
   },
   buttonText: {
-    color: color.surface,
+    color: colors.surface,
     fontWeight: 'bold',
   },
 });

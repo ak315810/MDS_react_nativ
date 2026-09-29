@@ -23,8 +23,8 @@ export function FilterChip({ label, selected, onPress }: Props) {
 
 const styles = StyleSheet.create({
   chip: {
-    backgroundColor: color.surface,
-    borderColor: color.border,
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
     borderWidth: 1,
     borderRadius: 6,
     paddingVertical: 8,
@@ -32,15 +32,15 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   chipSelected: {
-    backgroundColor: color.blue,
-    borderColor: color.blue,
+    backgroundColor: colors.blue,
+    borderColor: colors.blue,
   },
   text: {
-    color: color.textSecondary,
+    color: colors.textSecondary,
     fontSize: 13,
   },
   textSelected: {
-    color: color.surface,
+    color: colors.surface,
     fontWeight: 'bold',
   },
 });
