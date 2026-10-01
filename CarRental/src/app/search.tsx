@@ -144,6 +144,9 @@ const styles = StyleSheet.create({
 
   filters: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    rowGap: 8,
+    paddingHorizontal: 16,
     marginBottom: 16,
   },
 });
