@@ -19,7 +19,7 @@ export function CarCard({ brand, model, dailyPrice, specs, imageUrl, onPress }: 
         <View style={styles.info}>
           <Text style={styles.title}>{brand} {model}</Text>
           <Text style={styles.specs}>{specs}</Text>
-          <Text style={styles.dailyPrice}>{dailyPrice} DKK/day </Text>
+          <Text style={styles.price}>{dailyPrice} DKK/day </Text>
         </View>
       </View>
 

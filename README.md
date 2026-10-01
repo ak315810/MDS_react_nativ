@@ -8,6 +8,7 @@ A React Native mobile application designed for seamless car rentals
 * Anna Król (akrol26@student.sdu.dk)
 * Mariana Pal Ciccone (mapal26@student.sdu.dk)
 * María Ortiz de Pinedo (maort26@student.sdu.dk)
+* Diego Yus Prieto (diyus26@student.sdu.dk)
 
 * **Framework:** React Native (Expo)
 * **Folder Structure:** Feature/Layer-based inside `/src` (`components/`, `screens/`, `services/`, etc.)

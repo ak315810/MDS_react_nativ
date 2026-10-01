@@ -5,6 +5,7 @@ const storageKey = '@car_rental_sync_queue';
 
 let isOnline: boolean = true;
 let isProcessing: boolean = false;
+let currentRun: Promise<void> | null = null;
 
 export function setNetworkStatus(online:boolean): void{
     isOnline = online;
@@ -92,11 +93,18 @@ export async function cancelQueueItem(queueId: string): Promise<boolean> {
     return true;
     }
 
-export async function processQueue(): Promise<void> {
-    if (isProcessing || !isOnline) {
-        return;
+export function processQueue(): Promise<void> {
+    if (isProcessing && currentRun) {
+        return currentRun;
+    }
+    if (!isOnline) {
+        return Promise.resolve();
+    }
+    currentRun = runQueue();
+    return currentRun;
     }
 
+async function runQueue(): Promise<void> {
     isProcessing = true;
 
     try {
