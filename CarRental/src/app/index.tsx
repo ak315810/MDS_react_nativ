@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { PrimaryButton } from '../components/PrimaryButton';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -27,6 +28,7 @@ export default function HomeScreen() {
         <Text>{location}</Text>
       </TouchableOpacity>
 
+
       <Text style={styles.label}>Pick-up date</Text>
 
       <TouchableOpacity
@@ -45,11 +47,16 @@ export default function HomeScreen() {
         <Text>{returnDate}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.primaryButton}
+      <PrimaryButton
+        title="Search cars"
         onPress={() => router.push('/search')}
+      />
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/filters')}
       >
-        <Text style={styles.primaryButtonText}>Search cars</Text>
+        <Text>Filters</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
