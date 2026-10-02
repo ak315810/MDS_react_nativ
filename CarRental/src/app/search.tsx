@@ -1,17 +1,25 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+
 import { getCachedCars } from '../services/storageService';
 import { Car } from '../services/mockCars';
 import { CarCard } from '../components/CarCard';
-import { FilterChip } from '../components/FilterChip';
-import { useRouter } from 'expo-router';
 
 export default function SearchScreen() {
   const [cars, setCars] = useState<Car[]>([]);
-  const [selectedFuel, setSelectedFuel] = useState<string | null>(null);
-  const [selectedDoors, setSelectedDoors] = useState<number | null>(null);
-  const [selectedTrunk, setSelectedTrunk] = useState<number | null>(null);
+
   const router = useRouter();
+
+  const {
+    fuel,
+    doors,
+    trunk,
+  } = useLocalSearchParams<{
+    fuel?: string;
+    doors?: string;
+    trunk?: string;
+  }>();
 
   useEffect(() => {
     const loadCars = async () => {
@@ -24,105 +32,49 @@ export default function SearchScreen() {
 
   const displayedCars = cars.filter((car) => {
     const matchesFuel =
-      selectedFuel === null || car.fuelType === selectedFuel;
-  
+      !fuel || car.fuelType === fuel;
+
     const matchesDoors =
-      selectedDoors === null || car.doors === selectedDoors;
-  
+      !doors || car.doors === Number(doors);
+
     const matchesTrunk =
-      selectedTrunk === null || car.trunkCapacity >= selectedTrunk;
-  
+      !trunk || car.trunkCapacity >= Number(trunk);
+
     return matchesFuel && matchesDoors && matchesTrunk;
   });
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Search Results</Text>
-      <View style={styles.filters}>
-        <FilterChip
-          label="All"
-          selected={selectedFuel === null}
-          onPress={() => setSelectedFuel(null)}
-        />
+      <View style={styles.header}>
+        <Text style={styles.title}>Search Results</Text>
 
-        <FilterChip
-          label="Electric"
-          selected={selectedFuel === 'electric'}
-          onPress={() => setSelectedFuel('electric')}
-        />
-        <FilterChip
-          label="Hybrid"
-          selected={selectedFuel === 'hybrid'}
-          onPress={() => setSelectedFuel('hybrid')}
-        />
-
-        <FilterChip
-          label="Diesel"
-          selected={selectedFuel === 'diesel'}
-          onPress={() => setSelectedFuel('diesel')}
-        />
-
-        <FilterChip
-          label="Gasoline"
-          selected={selectedFuel === 'gasoline'}
-          onPress={() => setSelectedFuel('gasoline')}
-        />
-        <FilterChip
-          label="Any doors"
-          selected={selectedDoors === null}
-          onPress={() => setSelectedDoors(null)}
-        />
-
-        <FilterChip
-          label="2 doors"
-          selected={selectedDoors === 2}
-          onPress={() => setSelectedDoors(2)}
-        />
-
-        <FilterChip
-          label="4 doors"
-          selected={selectedDoors === 4}
-          onPress={() => setSelectedDoors(4)}
-        />
-
-        <FilterChip
-          label="5 doors"
-          selected={selectedDoors === 5}
-          onPress={() => setSelectedDoors(5)}
-        />
-        <FilterChip
-          label="Any trunk"
-          selected={selectedTrunk === null}
-          onPress={() => setSelectedTrunk(null)}
-        />
-
-        <FilterChip
-          label="300+ L"
-          selected={selectedTrunk === 300}
-          onPress={() => setSelectedTrunk(300)}
-        />
-
-        <FilterChip
-          label="500+ L"
-          selected={selectedTrunk === 500}
-          onPress={() => setSelectedTrunk(500)}
-        />
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => router.push('/filters')}
+        >
+          <Text style={styles.filterButtonText}>Filters</Text>
+        </TouchableOpacity>
       </View>
+
       <FlatList
-       style={{ width: '100%' }}
         data={displayedCars}
         keyExtractor={(item) => item.vehicleId}
         renderItem={({ item }) => (
-          <CarCard 
-          brand={item.brand}      
-          model={item.model} 
-          dailyPrice={item.dailyPrice} 
-          specs={item.fuelType}   
-          onPress={() => router.push(`/car/${item.vehicleId}`)}
+          <CarCard
+            brand={item.brand}
+            model={item.model}
+            dailyPrice={item.dailyPrice}
+            specs={item.fuelType}
+            onPress={() => router.push(`/car/${item.vehicleId}`)}
           />
         )}
         initialNumToRender={5}
         windowSize={5}
+        ListEmptyComponent={
+          <Text style={styles.emptyText}>
+            No cars match the selected filters.
+          </Text>
+        }
       />
     </View>
   );
@@ -132,21 +84,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
+    padding: 16,
+  },
+
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 16,
   },
 
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
   },
 
-  filters: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    rowGap: 8,
-    paddingHorizontal: 16,
-    marginBottom: 16,
+  filterButton: {
+    backgroundColor: '#0047AB',
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 6,
+  },
+
+  filterButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+
+  emptyText: {
+    textAlign: 'center',
+    marginTop: 32,
   },
 });
