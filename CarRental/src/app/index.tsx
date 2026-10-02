@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { Link } from 'expo-router';
 import * as Device from 'expo-device';
 import { Platform, StyleSheet } from 'react-native';
@@ -28,6 +29,17 @@ function getDevMenuHint() {
     </ThemedText>
   );
 }
+=======
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { PrimaryButton } from '../components/PrimaryButton';
+>>>>>>> Stashed changes
 
 export default function HomeScreen() {
   return (
@@ -59,9 +71,49 @@ export default function HomeScreen() {
           </Link>
         </ThemedView>
 
+<<<<<<< Updated upstream
         {Platform.OS === 'web' && <WebBadge />}
       </SafeAreaView>
     </ThemedView>
+=======
+      <Text style={styles.label}>Pick-up date</Text>
+
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setPickupDate('02/10/2026')}
+      >
+        <Text>{pickupDate}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.label}>Return date</Text>
+
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setReturnDate('05/10/2026')}
+      >
+        <Text>{returnDate}</Text>
+      </TouchableOpacity>
+
+      <PrimaryButton
+        title="Search cars"
+        onPress={() => router.push('/search')}
+      />
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/filters')}
+      > 
+        <Text>Filters</Text>
+      </TouchableOpacity>  
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/explore')}
+      >
+        <Text>View map</Text>
+      </TouchableOpacity>
+    </View>
+>>>>>>> Stashed changes
   );
 }
 
