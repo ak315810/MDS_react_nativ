@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { PhotoGallery } from '../../components/PhotoGallery';
 import { PolicySummary } from '../../components/PolicySummary';
 import { PriceSummary } from '../../components/PriceSummary';
 import { PrimaryButton } from '../../components/PrimaryButton';
@@ -50,6 +51,7 @@ export default function CarDetailsScreen() {
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+      <PhotoGallery images={car.images ?? []} />
       <Text style={styles.title}>{car.brand} {car.model}</Text>
       <Text style={styles.specs}>
         {car.productionYear} - {car.carType} - {car.fuelType} - {car.doors} doors - {car.trunkCapacity} L trunk - {car.color}

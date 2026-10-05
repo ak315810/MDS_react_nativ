@@ -12,6 +12,7 @@ export interface Car {
     color: string;
     dailyPrice: number;
     deposit: number;
+    images?: string[];
 }
 
 export const mockCars: Car[] = [
@@ -27,6 +28,13 @@ export const mockCars: Car[] = [
         color: 'white',
         dailyPrice: 450,
         deposit: 1500,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/2020_Toyota_Yaris_Design_HEV_CVT_1.5_Front.jpg/960px-2020_Toyota_Yaris_Design_HEV_CVT_1.5_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/2021_Toyota_Yaris_in_Silver_Metallic%2C_front_right%2C_06-05-2025.jpg/960px-2021_Toyota_Yaris_in_Silver_Metallic%2C_front_right%2C_06-05-2025.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/2020_Toyota_Yaris_Design_HEV_CVT_1.5_Rear.jpg/960px-2020_Toyota_Yaris_Design_HEV_CVT_1.5_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/2021_Toyota_Yaris_in_Silver_Metallic%2C_rear_right%2C_06-05-2025.jpg/960px-2021_Toyota_Yaris_in_Silver_Metallic%2C_rear_right%2C_06-05-2025.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Toyota_Yaris_Hybrid_%28IV%29_%E2%80%93_f_11102025.jpg/960px-Toyota_Yaris_Hybrid_%28IV%29_%E2%80%93_f_11102025.jpg',
+        ],
     },
     {
         vehicleId: '2',
@@ -40,6 +48,13 @@ export const mockCars: Car[] = [
         color: 'silver',
         dailyPrice: 600,
         deposit: 2000,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/2020_Volkswagen_Golf_Style_1.5_Front.jpg/960px-2020_Volkswagen_Golf_Style_1.5_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/2020_Volkswagen_Golf_Style_1.5_Side.jpg/960px-2020_Volkswagen_Golf_Style_1.5_Side.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/2020_Volkswagen_Golf_Style_1.5_Rear.jpg/960px-2020_Volkswagen_Golf_Style_1.5_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/2024_Volkswagen_Golf_R-Line_TSI_-_1498cc_1.5_%28150PS%29_Petrol_-_Reflex_Silver_-_02-2024%2C_Front.jpg/960px-2024_Volkswagen_Golf_R-Line_TSI_-_1498cc_1.5_%28150PS%29_Petrol_-_Reflex_Silver_-_02-2024%2C_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Volkswagen_Golf_VIII_-_Life_1st_-_Int%C3%A9rieur.jpg/960px-Volkswagen_Golf_VIII_-_Life_1st_-_Int%C3%A9rieur.jpg',
+        ],
     },
     {
         vehicleId: '3',
@@ -53,6 +68,12 @@ export const mockCars: Car[] = [
         color: 'black',
         dailyPrice: 650,
         deposit: 2000,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2021_Skoda_Octavia_SE_First_Edition_TSi_e-TEC_SA_1.0_Front.jpg/960px-2021_Skoda_Octavia_SE_First_Edition_TSi_e-TEC_SA_1.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Skoda_Octavia_IV_liftback_%28cropped%29.jpg/960px-Skoda_Octavia_IV_liftback_%28cropped%29.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/2021_Skoda_Octavia_SE_First_Edition_TSi_e-TEC_SA_1.0_Rear.jpg/960px-2021_Skoda_Octavia_SE_First_Edition_TSi_e-TEC_SA_1.0_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Skoda_Octavia_IV_interior.jpg/960px-Skoda_Octavia_IV_interior.jpg',
+        ],
     },
     {
         vehicleId: '4',
@@ -66,6 +87,13 @@ export const mockCars: Car[] = [
         color: 'green',
         dailyPrice: 800,
         deposit: 2500,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/2022_KIA_Sportage_GT-Line_-_1598cc_1.6_%28148PS%29_Petrol_-_Orange_Fusion_-_02-2025%2C_Front.jpg/960px-2022_KIA_Sportage_GT-Line_-_1598cc_1.6_%28148PS%29_Petrol_-_Orange_Fusion_-_02-2025%2C_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/2023_Kia_Sportage_X-Line_in_Jungle_Green%2C_Front_Right%2C_03-27-2022.jpg/960px-2023_Kia_Sportage_X-Line_in_Jungle_Green%2C_Front_Right%2C_03-27-2022.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2022_KIA_Sportage_GT-Line_-_1598cc_1.6_%28148PS%29_Petrol_-_Orange_Fusion_-_02-2025%2C_Rear.jpg/960px-2022_KIA_Sportage_GT-Line_-_1598cc_1.6_%28148PS%29_Petrol_-_Orange_Fusion_-_02-2025%2C_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/2023_Kia_Sportage_LX_in_Gravity_Grey%2C_Rear_Left%2C_05-22-2022.jpg/960px-2023_Kia_Sportage_LX_in_Gravity_Grey%2C_Rear_Left%2C_05-22-2022.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/2025_Kia_Sportage_GT-Line_facelift_front.jpg/960px-2025_Kia_Sportage_GT-Line_facelift_front.jpg',
+        ],
     },
     {
         vehicleId: '5',
@@ -79,6 +107,13 @@ export const mockCars: Car[] = [
         color: 'blue',
         dailyPrice: 950,
         deposit: 3000,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/2021_Tesla_Model_3_%28Front_Angle_view%29.jpg/960px-2021_Tesla_Model_3_%28Front_Angle_view%29.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/2019_Tesla_Model_3_Long_Range_AWD_Front.jpg/960px-2019_Tesla_Model_3_Long_Range_AWD_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/2021_Tesla_Model_3%2C_rear_11.10.21.jpg/960px-2021_Tesla_Model_3%2C_rear_11.10.21.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tesla_Model_3_interior.jpg/960px-Tesla_Model_3_interior.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/The_Model_3_Interior.jpg/960px-The_Model_3_Interior.jpg',
+        ],
     },
     {
         vehicleId: '6',
@@ -92,6 +127,11 @@ export const mockCars: Car[] = [
         color: 'grey',
         dailyPrice: 1100,
         deposit: 4000,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/2019_BMW_330i_M_Sport_2.0_Front.jpg/960px-2019_BMW_330i_M_Sport_2.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/2019_BMW_330i_M_Sport_2.0_Rear.jpg/960px-2019_BMW_330i_M_Sport_2.0_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/2019_BMW_320d_xDrive_M_Sport_2.0_Interior.jpg/960px-2019_BMW_320d_xDrive_M_Sport_2.0_Interior.jpg',
+        ],
     },
     {
         vehicleId: '7',
@@ -105,6 +145,13 @@ export const mockCars: Car[] = [
         color: 'red',
         dailyPrice: 380,
         deposit: 1200,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Hyundai_i20_%28BC3%29_IMG_3541.jpg/960px-Hyundai_i20_%28BC3%29_IMG_3541.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Hyundai_i20_%28BC3%29_IMG_3542.jpg/960px-Hyundai_i20_%28BC3%29_IMG_3542.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Hyundai_i20_%28BC3%29_IMG_3552.jpg/960px-Hyundai_i20_%28BC3%29_IMG_3552.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Hyundai_i20_%28BC3%29_IMG_4103.jpg/960px-Hyundai_i20_%28BC3%29_IMG_4103.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Hyundai_i20_%28BC3%29_Facelift_1X7A1941.jpg/960px-Hyundai_i20_%28BC3%29_Facelift_1X7A1941.jpg',
+        ],
     },
     {
         vehicleId: '8',
@@ -118,6 +165,13 @@ export const mockCars: Car[] = [
         color: 'white',
         dailyPrice: 1200,
         deposit: 4500,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/2018_Volvo_XC60_R-Design_D5_P-Pulse_2.0_Front.jpg/960px-2018_Volvo_XC60_R-Design_D5_P-Pulse_2.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/2017_Volvo_XC60_Momentum_T5_AWD_Automatic_2.0_Front.jpg/960px-2017_Volvo_XC60_Momentum_T5_AWD_Automatic_2.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/2018_Volvo_XC60_R-Design_D5_P-Pulse_2.0_Rear.jpg/960px-2018_Volvo_XC60_R-Design_D5_P-Pulse_2.0_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/2019_Volvo_XC60_T5_Momentum_in_Crystal_White_Pearl%2C_rear_left.jpg/960px-2019_Volvo_XC60_T5_Momentum_in_Crystal_White_Pearl%2C_rear_left.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/2017_Volvo_XC60_D4_R-Design_Automatic_2.0_Interior.jpg/960px-2017_Volvo_XC60_D4_R-Design_Automatic_2.0_Interior.jpg',
+        ],
     },
     {
         vehicleId: '9',
@@ -131,6 +185,12 @@ export const mockCars: Car[] = [
         color: 'black',
         dailyPrice: 900,
         deposit: 3500,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Front.jpg/960px-2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/2020_Audi_A4_S_Line_35_TDi_S-A_facelift_2.0_Front.jpg/960px-2020_Audi_A4_S_Line_35_TDi_S-A_facelift_2.0_Front.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Rear.jpg/960px-2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Rear.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Interior.jpg/960px-2019_Audi_A4_S_Line_40_TDi_Quattro_S-Tronic_facelift_2.0_Interior.jpg',
+        ],
     },
     {
         vehicleId: '10',
@@ -144,6 +204,11 @@ export const mockCars: Car[] = [
         color: 'yellow',
         dailyPrice: 420,
         deposit: 1500,
+        images: [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/2018_Fiat_500c_Pop_in_Granito_Grey%2C_front_right%2C_2026-08-08.jpg/960px-2018_Fiat_500c_Pop_in_Granito_Grey%2C_front_right%2C_2026-08-08.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/2018_Fiat_500c_Pop_in_Granito_Grey%2C_rear_right%2C_2026-08-08.jpg/960px-2018_Fiat_500c_Pop_in_Granito_Grey%2C_rear_right%2C_2026-08-08.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/3rd_generation_FIAT_500C_front.JPG/960px-3rd_generation_FIAT_500C_front.JPG',
+        ],
     }
 
 ]

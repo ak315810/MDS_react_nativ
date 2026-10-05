@@ -118,6 +118,7 @@ export default function SearchScreen() {
           model={item.model} 
           dailyPrice={item.dailyPrice} 
           specs={item.fuelType}   
+          imageUrl={item.images?.[0]}
           onPress={() => router.push(`/car/${item.vehicleId}`)}
           />
         )}
