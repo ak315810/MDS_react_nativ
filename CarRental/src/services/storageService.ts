@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Car, mockCars } from './mockCars';
 
-const CARS_STORAGE_KEY = 'cached_cars';
+const CARS_STORAGE_KEY = 'cached_cars_v3';
 
 // saving cars into cache memory
 export const storeCars = async (cars: Car[]): Promise<void> => {
