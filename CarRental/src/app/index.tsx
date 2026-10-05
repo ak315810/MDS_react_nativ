@@ -1,16 +1,70 @@
-import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { useRouter } from 'expo-router';
+import { PrimaryButton } from '../components/PrimaryButton';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  const [location, setLocation] = useState('Odense');
+  const [pickupDate, setPickupDate] = useState('Select date');
+  const [returnDate, setReturnDate] = useState('Select date');
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Car Rental</Text>
 
-      <Text style={styles.subtitle}>Find a car by search or map</Text>
+      <Text style={styles.label}>Location</Text>
 
-      <Link href="/search" style={styles.link}>Search cars</Link>
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setLocation('Odense')}
+      >
+        <Text>{location}</Text>
+      </TouchableOpacity>
 
-      <Link href="/explore" style={styles.link}>View map</Link>
+
+      <Text style={styles.label}>Pick-up date</Text>
+
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setPickupDate('02/10/2026')}
+      >
+        <Text>{pickupDate}</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.label}>Return date</Text>
+
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setReturnDate('05/10/2026')}
+      >
+        <Text>{returnDate}</Text>
+      </TouchableOpacity>
+
+      <PrimaryButton
+        title="Search cars"
+        onPress={() => router.push('/search')}
+      />
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/filters')}
+      >
+        <Text>Filters</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => router.push('/explore')}
+      >
+        <Text>View map</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -19,24 +73,49 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 24,
+    justifyContent: 'center',
   },
 
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 32,
   },
 
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 24,
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 6,
   },
 
-  link: {
-    fontSize: 18,
-    marginBottom: 16,
+  input: {
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+    borderRadius: 8,
+    padding: 14,
+    marginBottom: 18,
+  },
+
+  primaryButton: {
+    backgroundColor: '#0047AB',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 12,
+  },
+
+  primaryButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+
+  secondaryButton: {
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+    padding: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 12,
   },
 });
