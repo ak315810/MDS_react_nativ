@@ -12,6 +12,7 @@ import { calculatePrice, formatDkk } from '../services/priceCalculator';
 import { getCachedCars } from '../services/storageService';
 import { submitBooking } from '../services/syncQueue';
 import { BookingPayload, PaymentMethod } from '../services/syncTypes';
+import { useBooking } from '../context/BookingContext';
 
 const paymentOptions: { method: PaymentMethod; label: string }[] = [
   { method: 'card', label: 'Card' },
@@ -20,6 +21,11 @@ const paymentOptions: { method: PaymentMethod; label: string }[] = [
 ];
 
 const defaultLocationId = 'odense-central';
+
+function toIsoDate(date: Date): string {
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
 
 function addDays(date: Date, days: number): string {
   const result = new Date(date);
@@ -31,6 +37,7 @@ export default function CheckoutScreen() {
   const { carId, days } = useLocalSearchParams<{ carId: string; days: string }>();
   const router = useRouter();
   const netInfo = useNetInfo();
+  const booking = useBooking();
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
@@ -66,10 +73,11 @@ export default function CheckoutScreen() {
     );
   }
 
-  const breakdown = calculatePrice(car, Number(days) || 1);
-  const today = new Date();
-  const startDate = addDays(today, 0);
-  const endDate = addDays(today, breakdown.days);
+  const hasBookingDates = booking.startDate !== null && booking.endDate !== null;
+  const rentalDays = hasBookingDates ? booking.calculateDays() : Number(days) || 1;
+  const breakdown = calculatePrice(car, rentalDays);
+  const startDate = hasBookingDates ? toIsoDate(booking.startDate as Date) : addDays(new Date(), 0);
+  const endDate = hasBookingDates ? toIsoDate(booking.endDate as Date) : addDays(new Date(), breakdown.days);
   const isOffline = netInfo.isConnected === false;
 
   const handlePay = async () => {
@@ -105,6 +113,11 @@ export default function CheckoutScreen() {
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Text style={styles.title}>{car.brand} {car.model}</Text>
       <Text style={styles.dates}>{startDate} to {endDate}</Text>
+
+      <Text style={styles.dates}>
+        {booking.location ? `${booking.location} - ` : ''}
+        {startDate} to {endDate} ({breakdown.days} {breakdown.days === 1 ? 'day' : 'days'})
+      </Text>
 
       <PriceSummary breakdown={breakdown} />
       <PolicySummary />

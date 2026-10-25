@@ -7,13 +7,38 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { PrimaryButton } from '../components/PrimaryButton';
+import { useBooking } from '../context/BookingContext';
 
 export default function HomeScreen() {
   const router = useRouter();
 
-  const [location, setLocation] = useState('Odense');
-  const [pickupDate, setPickupDate] = useState('Select date');
-  const [returnDate, setReturnDate] = useState('Select date');
+  const {location, startDate, endDate, setBookingDetails, calculateDays} = useBooking();
+
+  const daysFromToday = (n: number) => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + n);
+    return d;
+    };
+
+  const [dateError, setDateError] = useState<string | null>(null);
+
+  const handleSearch = () => {
+    if (!location) {
+      setDateError('Please select a location.');
+      return;
+      }
+    if (!startDate || !endDate) {
+      setDateError('Please select pick-up and return dates');
+      return;
+      }
+    if (endDate < startDate) {
+      setDateError('Return date must be after the pick-up date.');
+      return;
+      }
+    setDateError(null);
+    router.push('/search');
+    };
 
   return (
     <View style={styles.container}>
@@ -23,9 +48,9 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setLocation('Odense')}
+        onPress={() => setBookingDetails(location || 'Odense', startDate || daysFromToday(1), endDate || daysFromToday(4))}
       >
-        <Text>{location}</Text>
+        <Text>{location || 'Select location'}</Text>
       </TouchableOpacity>
 
 
@@ -33,24 +58,33 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setPickupDate('02/10/2026')}
+        onPress={() => setBookingDetails(location, daysFromToday(1), endDate || daysFromToday(4))}
       >
-        <Text>{pickupDate}</Text>
+        <Text>{startDate ? startDate?.toLocaleDateString(): 'Select date'}</Text>
       </TouchableOpacity>
 
       <Text style={styles.label}>Return date</Text>
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setReturnDate('05/10/2026')}
+        onPress={() => setBookingDetails(location, startDate || daysFromToday(1), daysFromToday(4))}
       >
-        <Text>{returnDate}</Text>
+        <Text>{endDate ? endDate?.toLocaleDateString(): 'Select date'}</Text>
       </TouchableOpacity>
+
+      {startDate && endDate && (
+        <Text style={{marginBottom: 12, color: '#0047AB', fontWeight: '600' }}>
+          Total number of booking days: {calculateDays()}
+        </Text>
+      )}
+
+      {dateError && (
+        <Text style={{ color: '#C0392B', marginBottom: 8 }}>{dateError}</Text>
+      )}
 
       <PrimaryButton
         title="Search cars"
-        onPress={() => router.push('/search')}
-      />
+        onPress={handleSearch}/>
 
       <TouchableOpacity
         style={styles.secondaryButton}
