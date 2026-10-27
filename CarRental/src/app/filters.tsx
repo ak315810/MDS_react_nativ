@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { FilterChip } from '../components/FilterChip';
+import { PriceSlider } from '../components/PriceSlider';
 
 export default function FiltersScreen() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function FiltersScreen() {
   const [selectedFuel, setSelectedFuel] = useState<string | null>(null);
   const [selectedDoors, setSelectedDoors] = useState<number | null>(null);
   const [selectedTrunk, setSelectedTrunk] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number>(1000);
 
   const applyFilters = () => {
     router.push({
@@ -22,6 +24,7 @@ export default function FiltersScreen() {
         fuel: selectedFuel ?? '',
         doors: selectedDoors?.toString() ?? '',
         trunk: selectedTrunk?.toString() ?? '',
+        maxPrice: maxPrice.toString(),
       },
     });
   };
@@ -29,7 +32,13 @@ export default function FiltersScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Filters</Text>
-
+          <PriceSlider
+              value={maxPrice}
+              min={300}
+              max={1500}
+              step={50}
+              onValueChange={setMaxPrice}
+           />
       <Text style={styles.sectionTitle}>Powertrain</Text>
 
       <View style={styles.filterGroup}>
@@ -127,7 +136,7 @@ export default function FiltersScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F4F5F7',
     padding: 24,
   },
 
@@ -151,7 +160,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#0047AB',
+    backgroundColor: '#00A896',
     padding: 14,
     borderRadius: 8,
     alignItems: 'center',

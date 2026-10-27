@@ -7,95 +7,88 @@ import '@/global.css';
 
 import { Platform } from 'react-native';
 
-export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
-} as const;
+/**
+ * Scandinavian Design System & Theme
+ */
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
-
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
-
-export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
-} as const;
-
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
-
-//modified
+// new colors (Figma palette)
 export const colors = {
-    surface: '#FFFFFF', //Pure White -> screen and card backgrounds
-    surfaceSecondary: '#F7F7F7', // Off-white -> image backgrounds and chip bases
-    border: '#E5E5E5', // Light Gray -> card borders and dividers
-    primary: '#000000', // Pure Black -> headings, car titles, main prices
-    textSecondary: '#4A4A4A', // Charcoal Gray -> specifications, queued status
-    blue: '#0047AB', // Cobalt Blue -> primary actions, active filters
-    red: '#CC1100', // Crimson Red -> errors, failed status
-    green: '#0F753C', // Forest Green -> confirmed status
+  background: '#F4F5F7',       // Screen background
+  surface: '#FFFFFF',          // Cards and containers
+  surfaceSecondary: '#F7F7F7', // Chip bases and photo placeholders
+  border: '#E5E5E5',          // Card borders and dividers
+
+  primary: '#1A1D20',          // Headings and main text
+  textSecondary: '#4A4A4A',    // Subtitles and specs
+
+  turquoise: '#00A896',        // Primary action and slider
+  blue: '#00A896',             // Backwards compatibility alias
+  green: '#0F753C',            // Confirmed status
+  red: '#CC1100',              // Failed status and errors
 };
 
+// Spacing and margins
+export const spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+};
+
+// Border radius
+export const borderRadius = {
+  sm: 6,
+  md: 8,
+  lg: 12,
+  full: 9999,
+};
+
+// Typography scale
 export const typography = {
-    displayPrice: {
-    fontSize: 32,
+  displayPrice: {
+    fontSize: 30,
     fontWeight: '700' as const,
+    lineHeight: 36,
   },
-  h1:{
+  h1: {
     fontSize: 24,
-    fontWeight: '600' as const,
+    fontWeight: '700' as const,
+    lineHeight: 30,
   },
-  h2:{
+  h2: {
     fontSize: 18,
     fontWeight: '600' as const,
+    lineHeight: 24,
   },
-  bodyPrimary:{
+  bodyPrimary: {
     fontSize: 16,
+    fontWeight: '400' as const,
+    lineHeight: 22,
   },
-  bodySecondary:{
+  bodySecondary: {
     fontSize: 14,
+    fontWeight: '400' as const,
+    lineHeight: 20,
   },
-  caption:{
+  caption: {
     fontSize: 12,
+    fontWeight: '500' as const,
+    lineHeight: 16,
   },
 };
+
+// Backwards compatibility with Expo template
+export const Colors = {
+  light: {
+    text: colors.primary,
+    background: colors.background,
+    tint: colors.turquoise,
+  },
+  dark: {
+    text: '#FFFFFF',
+    background: '#121212',
+    tint: colors.turquoise,
+  },
+};
+export const Spacing = spacing;
