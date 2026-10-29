@@ -15,6 +15,10 @@ export interface Car {
     dailyPrice: number;
     deposit: number;
     images: string[];
+    coordinates: {
+        latitude: number;
+        longitude: number; 
+    }
 }
 
 const defaultImages = [
@@ -50,6 +54,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1693324199178-eb6414b0a688?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG95b3RhJTIweWFyaXMlMjBpbnRlcmlvcnxlbnwwfHwwfHx8MA%3D%3D',
             'https://images.unsplash.com/photo-1597817229717-86b45ecac81a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRveW90YSUyMHlhcmlzJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D'
         ],
+        coordinates: {
+            latitude: 55.4025,
+            longitude: 10.3875
+        }
     },
     {
         vehicleId: '2',
@@ -75,6 +83,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1714225417142-dbdad535071b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dm9sa3N3YWdlbiUyMGdvbGYlMjBpbnRlcmlvcnxlbnwwfHwwfHx8MA%3D%3D',
             'https://images.unsplash.com/photo-1710956943069-86dce29496f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHZvbGtzd2FnZW4lMjBnb2xmJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D'
         ],
+        coordinates: { 
+            latitude: 55.3670, 
+            longitude: 10.4280 
+        }
     },
     {
         vehicleId: '3',
@@ -99,6 +111,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1597770024370-6c23288ac2ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNrb2RhJTIwb2N0YXZpYXxlbnwwfHwwfHx8MA%3D%3D',
             'https://images.unsplash.com/photo-1630957403391-bb41bc4ad1fa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHNrb2RhJTIwb2N0YXZpYXxlbnwwfHwwfHx8MA%3D%3D'
         ],
+        coordinates: { 
+            latitude: 55.3980, 
+            longitude: 10.3920 
+        }
     },
     {
         vehicleId: '4',
@@ -124,6 +140,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1647292785376-7f326012a160?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGtpYSUyMHNwb3J0YWdlfGVufDB8fDB8fHww',
             'https://plus.unsplash.com/premium_photo-1694207208432-50a351ff6ae6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2lhJTIwaW50ZXJpb3J8ZW58MHx8MHx8fDA%3D'
         ],
+        coordinates: { 
+            latitude: 55.3820, 
+            longitude: 10.4190 
+        }
     },
     {
         vehicleId: '5',
@@ -149,6 +169,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1683617845344-d4714be2c305?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dGVzbGElMjBtb2RlbCUyMDMlMjBibHVlfGVufDB8fDB8fHww',
             'https://images.unsplash.com/photo-1562178235-7ba56b202338?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVzbGElMjBtb2RlbCUyMDMlMjBibHVlfGVufDB8fDB8fHww'
         ],
+        coordinates: { 
+            latitude: 55.3813, 
+            longitude: 10.3725 
+        }
     },
     {
         vehicleId: '6',
@@ -172,6 +196,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1734554258108-63f09694fe88?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJtdyUyMHNlcmllcyUyMDMlMjBncmV5fGVufDB8fDB8fHww',
             'https://images.unsplash.com/photo-1734554238845-3665b2ce945a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGJtdyUyMHNlcmllcyUyMDMlMjBncmV5fGVufDB8fDB8fHww'
         ],
+        coordinates: { 
+            latitude: 55.4038, 
+            longitude: 10.3886 
+        }
     },
     {
         vehicleId: '7',
@@ -197,6 +225,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1644907961094-8852aca773d8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGh5dW5kYWklMjBpMjB8ZW58MHx8MHx8fDA%3D',
             'https://images.unsplash.com/photo-1576877873979-98028853cd9a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjZ8fGh5dW5kYWklMjBpMjB8ZW58MHx8MHx8fDA%3D'
         ],
+        coordinates: {
+            latitude: 55.4025,
+            longitude: 10.3875
+        }
     },
     {
         vehicleId: '8',
@@ -222,6 +254,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1601026968687-64ea4ba3c36f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHZvbHZvJTIweGM2MHxlbnwwfHwwfHx8MA%3D%3D',
             'https://images.unsplash.com/photo-1707290990298-7b5a4c85dc55?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHZvbHZvJTIweGM2MHxlbnwwfHwwfHx8MA%3D%3D'
         ],
+        coordinates: { 
+            latitude: 55.3813, 
+            longitude: 10.3725 
+        }
     },
     {
         vehicleId: '9',
@@ -246,6 +282,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1710011115876-301113e1bb61?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXVkaSUyMGE0fGVufDB8fDB8fHww',
             'https://images.unsplash.com/photo-1652509563476-99f7aa259b1e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGF1ZGklMjBhNHxlbnwwfHwwfHx8MA%3D%3D'
         ],
+        coordinates: {
+            latitude: 55.4025,
+            longitude: 10.3875
+        }
     },
     {
         vehicleId: '10',
@@ -269,6 +309,10 @@ export const mockCars: Car[] = [
             'https://images.unsplash.com/photo-1657713453481-52998321e771?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmlhdCUyMDUwMCUyMGNhYnJpbyUyMHllbGxvd3xlbnwwfHwwfHx8MA%3D%3D',
             'https://images.unsplash.com/photo-1690413971712-56f30b01c2cf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlhdCUyMDUwMCUyMGludGVyaW9yfGVufDB8fDB8fHww'
         ],
+        coordinates: { 
+            latitude: 55.3670, 
+            longitude: 10.4280 
+        }
     }
 ];
 
