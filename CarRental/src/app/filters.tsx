@@ -16,6 +16,8 @@ export default function FiltersScreen() {
   const [selectedDoors, setSelectedDoors] = useState<number | null>(null);
   const [selectedTrunk, setSelectedTrunk] = useState<number | null>(null);
   const [maxPrice, setMaxPrice] = useState<number>(1000);
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedCarType, setSelectedCarType] = useState<string | null>(null);
 
   const applyFilters = () => {
     router.push({
@@ -25,6 +27,8 @@ export default function FiltersScreen() {
         doors: selectedDoors?.toString() ?? '',
         trunk: selectedTrunk?.toString() ?? '',
         maxPrice: maxPrice.toString(),
+        brand: selectedBrand ?? '',
+        carType: selectedCarType ?? '',
       },
     });
   };
@@ -123,6 +127,47 @@ export default function FiltersScreen() {
         />
       </View>
 
+      <Text style={styles.sectionTitle}>Brand</Text>
+
+      <View style={styles.filterGroup}>
+        {['All', 'Toyota', 'Volkswagen', 'Skoda', 'Kia',
+          'Tesla', 'BMW', 'Hyundai', 'Volvo', 'Audi', 'Fiat'
+        ].map((brand) => (
+          <FilterChip
+            key={brand}
+            label={brand}
+            selected={
+              brand === 'All'
+                ? selectedBrand === null
+                : selectedBrand === brand
+            }
+            onPress={() =>
+              setSelectedBrand(brand === 'All' ? null : brand)
+            }
+          />
+        ))}
+      </View>
+
+      <Text style={styles.sectionTitle}>Car Type</Text>
+
+      <View style={styles.filterGroup}>
+        {['All', 'hatchback', 'sedan', 'suv', 'estate',
+          'cabrio', 'coupe', 'minivan'
+        ].map((type) => (
+          <FilterChip
+            key={type}
+            label={type === 'All' ? 'All' : type.toUpperCase()}
+            selected={
+              type === 'All'
+                ? selectedCarType === null
+                : selectedCarType === type
+            }
+            onPress={() =>
+              setSelectedCarType(type === 'All' ? null : type)
+            }
+          />
+        ))}
+      </View>
       <TouchableOpacity
         style={styles.button}
         onPress={applyFilters}

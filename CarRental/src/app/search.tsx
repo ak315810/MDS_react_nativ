@@ -15,10 +15,16 @@ export default function SearchScreen() {
     fuel,
     doors,
     trunk,
+    maxPrice,
+    brand,
+    carType,
   } = useLocalSearchParams<{
     fuel?: string;
     doors?: string;
     trunk?: string;
+    maxPrice?: string;
+    brand?: string;
+    carType?: string;
   }>();
 
   useEffect(() => {
@@ -33,14 +39,30 @@ export default function SearchScreen() {
   const displayedCars = cars.filter((car) => {
     const matchesFuel =
       !fuel || car.fuelType === fuel;
-
+  
     const matchesDoors =
       !doors || car.doors === Number(doors);
-
+  
     const matchesTrunk =
       !trunk || car.trunkCapacity >= Number(trunk);
+  
+    const matchesPrice =
+      !maxPrice || car.dailyPrice <= Number(maxPrice);
 
-    return matchesFuel && matchesDoors && matchesTrunk;
+    const matchesBrand =
+      !brand || car.brand === brand;
+    
+    const matchesCarType =
+      !carType || car.carType === carType;
+  
+    return (
+  matchesFuel &&
+  matchesDoors &&
+  matchesTrunk &&
+  matchesPrice &&
+  matchesBrand &&
+  matchesCarType
+);
   });
 
   return (
