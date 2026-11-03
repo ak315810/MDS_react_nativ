@@ -1,21 +1,22 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { PhotoGallery } from '../../components/PhotoGallery';
 import { PolicySummary } from '../../components/PolicySummary';
 import { PriceSummary } from '../../components/PriceSummary';
 import { PrimaryButton } from '../../components/PrimaryButton';
 import { colors, typography } from '../../constants/theme';
+import { useBooking } from '../../context/BookingContext';
 import { Car } from '../../services/mockCars';
-import { calculatePrice, maxRentalDays, minRentalDays } from '../../services/priceCalculator';
+import { calculatePrice } from '../../services/priceCalculator';
 import { getCachedCars } from '../../services/storageService';
 
 export default function CarDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
+  const { location, startDate, endDate, calculateDays } = useBooking();
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [days, setDays] = useState<number>(1);
 
   useEffect(() => {
     const loadCar = async () => {
@@ -43,45 +44,39 @@ export default function CarDetailsScreen() {
     );
   }
 
-  const breakdown = calculatePrice(car, days);
-
   const goToCheckout = () => {
-    router.push({ pathname: '/checkout', params: { carId: car.vehicleId, days: String(days) } });
+    router.push({ pathname: '/checkout', params: { carId: car.vehicleId } });
   };
+
+  // Guests can reach this screen from the map before choosing anything on the home screen
+  const hasBooking = Boolean(location && startDate && endDate);
+  const breakdown = hasBooking ? calculatePrice(car, calculateDays()) : null;
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <PhotoGallery images={car.images ?? []} />
       <Text style={styles.title}>{car.brand} {car.model}</Text>
       <Text style={styles.specs}>
-        {car.productionYear} - {car.carType} - {car.fuelType} - {car.doors} doors - {car.trunkCapacity} L trunk - {car.color}
+        {car.productionYear} - {car.carType} - {car.fuelType} - {car.doors} doors - {car.trunkCapacity} L trunk
       </Text>
+      <Text style={styles.specs}>Color: {car.color}</Text>
 
-      <Text style={styles.sectionLabel}>Rental days</Text>
-      <View style={styles.stepper}>
-        <Pressable
-          style={({ pressed }) => [styles.stepButton, pressed && styles.stepPressed]}
-          onPress={() => setDays((d) => Math.max(minRentalDays, d - 1))}
-          disabled={days <= minRentalDays}
-          accessibilityLabel="Remove one day"
-        >
-          <Text style={styles.stepText}>-</Text>
-        </Pressable>
-        <Text style={styles.days}>{days}</Text>
-        <Pressable
-          style={({ pressed }) => [styles.stepButton, pressed && styles.stepPressed]}
-          onPress={() => setDays((d) => Math.min(maxRentalDays, d + 1))}
-          disabled={days >= maxRentalDays}
-          accessibilityLabel="Add one day"
-        >
-          <Text style={styles.stepText}>+</Text>
-        </Pressable>
-      </View>
-
-      <PriceSummary breakdown={breakdown} />
-      <PolicySummary />
-
-      <PrimaryButton title="Continue to booking" onPress={goToCheckout} />
+      {breakdown ? (
+        <>
+          <Text style={styles.specs}>
+            {location} - {startDate?.toLocaleDateString()} to {endDate?.toLocaleDateString()} ({breakdown.days} {breakdown.days === 1 ? 'day' : 'days'})
+          </Text>
+          <PriceSummary breakdown={breakdown} />
+          <PolicySummary />
+          <PrimaryButton title="Continue to booking" onPress={goToCheckout} />
+        </>
+      ) : (
+        <>
+          <Text style={styles.specs}>Choose a location and dates to see the total price.</Text>
+          <PolicySummary />
+          <PrimaryButton title="Choose location and dates" onPress={() => router.push('/')} />
+        </>
+      )}
     </ScrollView>
   );
 }
@@ -113,37 +108,5 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     marginTop: 4,
     marginBottom: 16,
-  },
-  sectionLabel: {
-    ...typography.bodySecondary,
-    color: colors.textSecondary,
-    marginBottom: 8,
-  },
-  stepper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  stepButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.border,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  stepPressed: {
-    backgroundColor: colors.surfaceSecondary,
-  },
-  stepText: {
-    ...typography.h2,
-    color: colors.blue,
-  },
-  days: {
-    ...typography.h2,
-    color: colors.primary,
-    minWidth: 48,
-    textAlign: 'center',
   },
 });

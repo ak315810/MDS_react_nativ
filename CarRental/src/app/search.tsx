@@ -86,7 +86,7 @@ export default function SearchScreen() {
             brand={item.brand}
             model={item.model}
             dailyPrice={item.dailyPrice}
-            specs={item.fuelType}
+            specs={`${item.fuelType} - ${item.color}`}
             imageUrl={item.images?.[0]}
             onPress={() => router.push(`/car/${item.vehicleId}`)}
           />
