@@ -4,8 +4,10 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { DateRangeCalendar, lastReturnDate } from '../components/DateRangeCalendar';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { useBooking } from '../context/BookingContext';
 
@@ -14,14 +16,19 @@ export default function HomeScreen() {
 
   const {location, startDate, endDate, setBookingDetails, calculateDays} = useBooking();
 
-  const daysFromToday = (n: number) => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    d.setDate(d.getDate() + n);
-    return d;
-    };
-
   const [dateError, setDateError] = useState<string | null>(null);
+  const [selecting, setSelecting] = useState<'start' | 'end' | null>(null);
+
+  const selectDay = (day: Date) => {
+    if (selecting === 'start') {
+      const keepEnd = endDate && endDate >= day && endDate <= lastReturnDate(day);
+      setBookingDetails(location, day, keepEnd ? endDate : null);
+      setSelecting('end');
+      return;
+      }
+    setBookingDetails(location, startDate, day);
+    setSelecting(null);
+    };
 
   const handleSearch = () => {
     if (!location) {
@@ -48,7 +55,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setBookingDetails(location || 'Odense', startDate || daysFromToday(1), endDate || daysFromToday(4))}
+        onPress={() => setBookingDetails('Odense', startDate, endDate)}
       >
         <Text>{location || 'Select location'}</Text>
       </TouchableOpacity>
@@ -58,7 +65,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setBookingDetails(location, daysFromToday(1), endDate || daysFromToday(4))}
+        onPress={() => setSelecting('start')}
       >
         <Text>{startDate ? startDate?.toLocaleDateString(): 'Select date'}</Text>
       </TouchableOpacity>
@@ -67,7 +74,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.input}
-        onPress={() => setBookingDetails(location, startDate || daysFromToday(1), daysFromToday(4))}
+        onPress={() => setSelecting(startDate ? 'end' : 'start')}
       >
         <Text>{endDate ? endDate?.toLocaleDateString(): 'Select date'}</Text>
       </TouchableOpacity>
@@ -99,6 +106,27 @@ export default function HomeScreen() {
       >
         <Text>View map</Text>
       </TouchableOpacity>
+
+      {selecting && (
+        <Modal transparent animationType="fade" onRequestClose={() => setSelecting(null)}>
+          <View style={styles.modalBackdrop}>
+            <View style={styles.modalCard}>
+              <Text style={styles.modalTitle}>
+                {selecting === 'start' ? 'Select pick-up date' : 'Select return date'}
+              </Text>
+              <DateRangeCalendar
+                startDate={startDate}
+                endDate={endDate}
+                selecting={selecting}
+                onSelect={selectDay}
+              />
+              <TouchableOpacity style={styles.secondaryButton} onPress={() => setSelecting(null)}>
+                <Text>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 }
@@ -151,5 +179,27 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 12,
+  },
+
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+
+  modalCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    width: '100%',
+    maxWidth: 400,
+  },
+
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
 });

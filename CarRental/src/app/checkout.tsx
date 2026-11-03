@@ -2,6 +2,7 @@ import { useNetInfo } from '@react-native-community/netinfo';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { CardDetails, cardError, CardForm, emptyCard } from '../components/CardForm';
 import { FilterChip } from '../components/FilterChip';
 import { PolicySummary } from '../components/PolicySummary';
 import { PriceSummary } from '../components/PriceSummary';
@@ -20,27 +21,20 @@ const paymentOptions: { method: PaymentMethod; label: string }[] = [
   { method: 'google_pay', label: 'Google Pay' },
 ];
 
-const defaultLocationId = 'odense-central';
-
 function toIsoDate(date: Date): string {
   const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
   return local.toISOString().slice(0, 10);
 }
 
-function addDays(date: Date, days: number): string {
-  const result = new Date(date);
-  result.setDate(result.getDate() + days);
-  return result.toISOString().slice(0, 10);
-}
-
 export default function CheckoutScreen() {
-  const { carId, days } = useLocalSearchParams<{ carId: string; days: string }>();
+  const { carId } = useLocalSearchParams<{ carId: string }>();
   const router = useRouter();
   const netInfo = useNetInfo();
   const booking = useBooking();
   const [car, setCar] = useState<Car | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
+  const [card, setCard] = useState<CardDetails>(emptyCard);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [bookingId] = useState<string>(
@@ -73,22 +67,38 @@ export default function CheckoutScreen() {
     );
   }
 
-  const hasBookingDates = booking.startDate !== null && booking.endDate !== null;
-  const rentalDays = hasBookingDates ? booking.calculateDays() : Number(days) || 1;
-  const breakdown = calculatePrice(car, rentalDays);
-  const startDate = hasBookingDates ? toIsoDate(booking.startDate as Date) : addDays(new Date(), 0);
-  const endDate = hasBookingDates ? toIsoDate(booking.endDate as Date) : addDays(new Date(), breakdown.days);
+  // The context lives in memory, so a page reload on web empties it
+  if (!booking.location || !booking.startDate || !booking.endDate) {
+    return (
+      <View style={styles.centered}>
+        <Text style={styles.dates}>Choose a location and dates to continue.</Text>
+        <PrimaryButton title="Choose location and dates" onPress={() => router.replace('/')} />
+      </View>
+    );
+  }
+
+  const breakdown = calculatePrice(car, booking.calculateDays());
+  const startDate = toIsoDate(booking.startDate);
+  const endDate = toIsoDate(booking.endDate);
+  const locationId = booking.location;
   const isOffline = netInfo.isConnected === false;
 
   const handlePay = async () => {
     if (submitting) return;
+
+    const invalidCard = paymentMethod === 'card' ? cardError(card) : null;
+    if (invalidCard) {
+      setError(invalidCard);
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
 
     const payload: BookingPayload = {
       bookingId,
       vehicleId: car.vehicleId,
-      locationId: defaultLocationId,
+      locationId,
       startDate,
       endDate,
       totalPrice: breakdown.totalToPay,
@@ -112,11 +122,8 @@ export default function CheckoutScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       <Text style={styles.title}>{car.brand} {car.model}</Text>
-      <Text style={styles.dates}>{startDate} to {endDate}</Text>
-
       <Text style={styles.dates}>
-        {booking.location ? `${booking.location} - ` : ''}
-        {startDate} to {endDate} ({breakdown.days} {breakdown.days === 1 ? 'day' : 'days'})
+        {locationId} - {startDate} to {endDate} ({breakdown.days} {breakdown.days === 1 ? 'day' : 'days'})
       </Text>
 
       <PriceSummary breakdown={breakdown} />
@@ -129,10 +136,15 @@ export default function CheckoutScreen() {
             key={option.method}
             label={option.label}
             selected={paymentMethod === option.method}
-            onPress={() => setPaymentMethod(option.method)}
+            onPress={() => {
+              setPaymentMethod(option.method);
+              setError(null);
+            }}
           />
         ))}
       </View>
+
+      {paymentMethod === 'card' && <CardForm card={card} onChange={setCard} />}
 
       {isOffline && (
         <Text style={styles.offline}>

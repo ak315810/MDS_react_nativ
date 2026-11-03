@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface BookingContextType {  location: string;
                                 startDate: Date | null;
                                 endDate: Date | null;
-                                setBookingDetails: (location:string, startDate:Date, endDate:Date) => void;
+                                setBookingDetails: (location:string, startDate:Date | null, endDate:Date | null) => void;
                                 calculateDays: () => number;
                             }
 
@@ -23,7 +23,8 @@ export function BookingProvider({children}: {children:ReactNode}) {
     const calculateDays = () => {
         if (!startDate || !endDate) return 0;
         const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        // round, not ceil: a daylight-saving change adds an hour and would charge an extra day
+        const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
         return diffDays > 0 ? diffDays : 1;
         };
     
